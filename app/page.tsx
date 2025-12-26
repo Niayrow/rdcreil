@@ -3,16 +3,17 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react"; // <--- AJOUT DE SUSPENSE ICI
 import {
   Bus, Bell, CheckCircle2, AlertOctagon, MessageCircle, ChevronRight,
   Clock, X, Loader2, Wifi, Check, LogOut, MapPin
 } from "lucide-react";
 import { clsx } from "clsx";
 
-export default function Home() {
+// 1. ON DÉPLACE TOUTE TA LOGIQUE DANS CE SOUS-COMPOSANT "HomeContent"
+function HomeContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // C'est lui qui posait problème sans Suspense
   const isServiceStarted = searchParams.get('service_started') === 'true';
 
   // --- ÉTATS ---
@@ -262,5 +263,15 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+// 2. LE COMPOSANT EXPORTÉ PAR DÉFAUT QUI ENVELOPPE TOUT AVEC SUSPENSE
+export default function Home() {
+  return (
+    // Fallback: ce qu'on affiche pendant le chargement des paramètres d'URL (très rapide)
+    <Suspense fallback={<div className="flex h-screen w-full items-center justify-center bg-[#0a0e17] text-white"><Loader2 className="animate-spin mr-2" /> Chargement...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
