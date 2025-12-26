@@ -5,52 +5,33 @@
   --font-sans: system-ui, -apple-system, sans-serif;
 }
 
-/* DÉFINITION DES VARIABLES DE THÈME */
+/* DÉFINITION UNIQUE (MODE SOMBRE PAR DÉFAUT) */
 :root {
-  /* --- THÈME CLAIR (Light) --- */
-  --background: #f8fafc;
-  /* Fond global (Slate-50) */
-  --foreground: #0f172a;
-  /* Texte principal (Slate-900) */
-  --muted: #64748b;
-  /* Texte secondaire (Slate-500) */
-
-  --card: #ffffff;
-  /* Fond des cartes */
-  --card-border: #e2e8f0;
-  /* Bordure des cartes (Slate-200) */
-
-  --primary: #2563eb;
-  /* Bleu principal */
-  --primary-fg: #ffffff;
-  /* Texte sur bleu */
-
-  --nav-bg: #ffffff;
-  /* Fond de la navbar */
-  --nav-border: #e2e8f0;
-  /* Bordure de la navbar */
-}
-
-.dark {
-  /* --- THÈME SOMBRE (Dark) --- */
-  --background: #020617;
   /* Fond global (Slate-950 - Bleu nuit très sombre) */
-  --foreground: #f1f5f9;
+  --background: #020617;
+
   /* Texte principal (Slate-100) */
-  --muted: #94a3b8;
+  --foreground: #f1f5f9;
+
   /* Texte secondaire (Slate-400) */
+  --muted: #94a3b8;
 
-  --card: #1e293b;
   /* Fond des cartes (Slate-800) */
-  --card-border: #334155;
-  /* Bordure des cartes (Slate-700) */
+  --card: #1e293b;
 
+  /* Bordure des cartes (Slate-700) */
+  --card-border: #334155;
+
+  /* Bleu un peu plus clair pour le contraste sur fond noir */
   --primary: #3b82f6;
-  /* Bleu un peu plus clair pour le contraste */
+
+  /* Texte sur bleu */
   --primary-fg: #ffffff;
 
-  --nav-bg: #0f172a;
   /* Fond navbar (Slate-900) */
+  --nav-bg: #0f172a;
+
+  /* Bordure de la navbar */
   --nav-border: #1e293b;
 }
 
@@ -59,11 +40,11 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  /* On garde la transition pour la fluidité si des éléments changent */
   transition: background-color 0.3s, color 0.3s;
 }
 
 /* CLASSE UTILITAIRE POUR LES CARTES */
-/* Plus besoin de répéter bg-white dark:bg-slate-800 partout */
 .card-base {
   background-color: var(--card);
   border: 1px solid var(--card-border);
